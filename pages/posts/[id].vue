@@ -20,6 +20,9 @@ definePageMeta({
      * しかし、存在してなかったら、そのまま404エラーを表示する。
      */
     return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id) // Check if the id is made up of digits
+  },
+  pageTransition: {
+    name: 'rotate'
   }
 })
 </script>

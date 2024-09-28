@@ -23,6 +23,9 @@ definePageMeta({
   },
   pageTransition: {
     name: 'rotate'
-  }
+  },
+  layoutTransition: false,
+  layout: 'orange',
+
 })
 </script>

@@ -1,30 +1,36 @@
-<script setup lang="ts">
+<script setup>
 /**
- * useState('counter') を使った複数のコンポーネントが、同じリアクティブな状態（state）を共有するということです。
- * これにより、異なるコンポーネントで useState('counter') を使っても、その値は同じ状態として管理されます。
- * つまり、1つのコンポーネントで状態を更新すれば、他のコンポーネントにもその変更が反映されます。
- * 
- * useState
- * Nuxt で グローバルに状態を共有するための方法
- * サーバーサイドでもクライアントサイドでも動作し、特定のキー（例えば 'counter'）で状態を管理
- * 
- * 状態生成コード
- * useState('key', () => {})
- * 
- * 状態取り出すコード
- * useState('key')
+ * アプリケーションの状態はすぐに使える同期的な値で初期化できますが、
+ * データが非同期に解決される場合（例えば、APIからのデータ取得が必要な場合）、
+ * その初期化が難しくなります。Nuxt では、アプリケーション全体の状態を初期化するために useState を使用しますが、
+ * この初期化はサーバーサイドで行われることもあるため、非同期処理をうまく扱う必要があります。
  */
-const counter = useState('counter', () => Math.round(Math.random() * 1000))
+
+// グローバルなカウンター状態を管理するためのuseState
+const counter = useState('counter', () => 0)
+
+// 非同期でデータをフェッチして状態を初期化
+const initializeCounter = async () => {
+  const data = await fetchCounterData() // ここで非同期にデータを取得
+  counter.value = data.counter // データを使って状態を更新
+}
+
+// callOnceを使って、initializeCounterを一度だけ実行
+callOnce(initializeCounter)
 </script>
 
 <template>
-  <div>
-    Counter: {{ counter }}
-    <button class="bg-yellow-200 p-2" @click="counter++">
-      +
-    </button>
-    <button class="bg-yellow-800 p-2" @click="counter--">
-      -
-    </button>
-  </div>
+  <div>{{ counter }}</div>
 </template>
+
+<script>
+// 非同期にデータを取得するダミー関数
+async function fetchCounterData() {
+  // 実際にはAPIリクエストをここで行う
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({ counter: 42 })
+    }, 1000)
+  })
+}
+</script>

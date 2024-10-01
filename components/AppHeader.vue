@@ -17,6 +17,9 @@
         <li>
           <NuxtLink to="/fetch">Fetch</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/count">Counter</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>

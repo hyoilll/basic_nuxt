@@ -20,6 +20,9 @@
         <li>
           <NuxtLink to="/count">Counter</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/pinia">Pinia</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>

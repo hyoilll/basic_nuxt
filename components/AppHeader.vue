@@ -14,6 +14,9 @@
         <li>
           <NuxtLink to="/posts/2">Post2</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/fetch">Fetch</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>
